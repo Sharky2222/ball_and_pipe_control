@@ -1,4 +1,4 @@
-function [distance,pwm,target,deadpan] = read_data(device)
+function [distance, pwm, target, deadpan] = read_data(device)
 %% Reads data sent back from Ball and Pipe system
 % Inputs:
 %  ~ device: serialport object controlling the real world system
@@ -17,20 +17,23 @@ function [distance,pwm,target,deadpan] = read_data(device)
 %% Ask nicely for data
 % use the serialport() command options to write the correct letter to the
 % system (Hint: the letters are in the spec sheet)
-%writeline(device, "S")
-write(device, "S", "string")
+%write(device, "H", "single")
+%write(device, "S", "string")
+
+%writeline(device, "H")
+writeline(device, "S")
 
 %% Read data
 % use the serialport() command options to read the response
 %info = readline(device)
-info = read(device, 20, "string")
+info = read(device, 20, "char")
 
 %% Translate
 % translate the response to 4 doubles using str2double() and
 % extractBetween() (Hint: the response is in the spec sheet)
-% distance   = str2double(extractBetween(info,2,6))
-% manual_pwm = str2double(extractBetween(info,7,11))
-% target     = str2double(extractBetween(info,12,16))
-% deadpan    = str2double(extractBetween(info,17,21))
+distance   = str2double(extractBetween(info,2,6))
+pwm = str2double(extractBetween(info,7,11))
+target     = str2double(extractBetween(info,12,16))
+deadpan    = str2double(extractBetween(info,17,21))
 
 end
