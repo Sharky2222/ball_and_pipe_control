@@ -10,6 +10,7 @@ close all; clc; clear device;
 
 %% Connect to device
 % device = open serial communication in the proper COM port
+device = serialport("COM3", 19200)
 
 %% Parameters
 target      = 0.5;   % Desired height of the ball [m]
@@ -29,8 +30,8 @@ error_sum   = 0;
 %% Feedback loop
 while true
     %% Read current height
-    % [add_proper_args] = read_data(add_proper_args);
-    % y = ir2y(add_proper_args); % Convert from IR reading to distance from bottom [m]
+    [add_proper_args] = read_data(add_proper_args);
+    y = ir2y(add_proper_args); % Convert from IR reading to distance from bottom [m]
     
     %% Calculate errors for PID controller
     error_prev = error;             % D
@@ -40,8 +41,9 @@ while true
     %% Control
     prev_action = action;
     %action = % Come up with a scheme no answer is right but do something
-    % set_pwm(add_proper_args); % Implement action
-        
+    set_pwm(add_proper_args); % Implement action
+    % 2550 is kinda close to stable 
+
     % Wait for next sample
     pause(sample_rate)
 end
