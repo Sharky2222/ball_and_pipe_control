@@ -21,19 +21,20 @@ function [distance, pwm, target, deadpan] = read_data(device)
 %write(device, "S", "string")
 
 %writeline(device, "H")
-writeline(device, "S")
+write(device, "S","string")
 
 %% Read data
 % use the serialport() command options to read the response
 %info = readline(device)
-info = read(device, 20, "char")
-
+pause(.1);
+info_raw = read(device, 20, "String"); %Reads in Raw data
+info = split(extractAfter(info_raw,':'),',');
 %% Translate
 % translate the response to 4 doubles using str2double() and
 % extractBetween() (Hint: the response is in the spec sheet)
-distance   = str2double(extractBetween(info,2,6))
-pwm = str2double(extractBetween(info,7,11))
-target     = str2double(extractBetween(info,12,16))
-deadpan    = str2double(extractBetween(info,17,21))
+distance   = str2double(info{1});
+pwm        = str2double(info{2});
+target     = str2double(info{3})
+deadpan    = str2double(info{4});
 
 end
