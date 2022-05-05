@@ -3,7 +3,7 @@
 % The current control system is a PID controller.
 %
 % Created by Kyle Naddeo, Mon Jan 3 11:19:49 EST 
-% Modified by YOUR NAME AND DATE
+% Modified by Nikolas Figueroa
 
 %% Start fresh
 close all; clc; clear device;
