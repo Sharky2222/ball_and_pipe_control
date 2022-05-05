@@ -12,13 +12,13 @@ function [y, pipe_percentage] = ir2y(ir)
 
 %% Parameters
 ir_bottom = 956;  % IR reading when ball is at bottom of pipe
-ir_top    = 64;  % "                        " top of pipe
+ir_top    = 64;  % top of pipe
 y_top     = 0.9144; % Ball at top of the pipe [m]
 
 %% Bound the IR reading and send error message 
 % (remeber the IR values are inverted ie small values == large height and large values == small height)
 
 %% Set
-pipe_percentage = (ir - ir_top)/(ir_bottom - ir_top); 
-y = y_top * pipe_percentage;
+pipe_percentage = (ir - ir_top)/(ir_bottom - ir_top); %Calculates where you are at in the pipe with sensor
+y = y_top * pipe_percentage; %This is where you are actually at in the pipe in units m
 

@@ -44,12 +44,11 @@ while true
     % y is smaller closer half to sensor, larger at bottom
     if error ~=0 %prevents the error from reading 0 and sending 0 value which causes the ball to stutter
         %negative becuase you want the ball to increase speed when below target, and decrease speed above target   
-        KP = -error*3000+1500; %3400+1500 general control for the system
-        KI = -16*(error_sum); %20 controls going up speed 
-        KD = -8000*(error-error_prev) %7060 controls going down speeds 
+        KP = -error*3000+1500; %This is proportional control
+        KI = -16*(error_sum); %This is integral control, it controls the going up speed 
+        KD = -8000*(error-error_prev) %This is the derivative control, it controls the going down speed
     end
-    action = floor(KP+KI+KD) %+ KD% + KI  %PD control works with red ball 8.3
-    %error - error_prev because the system is affected by error only for derivative
+    action = floor(KP+KI+KD) %This is the whole PID system that controls the action
     %kd is determined off of sampling rate which is the constant
     set_pwm(device,action); % Implement action
     % Wait for next sample

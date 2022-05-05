@@ -32,7 +32,7 @@ info = split(extractAfter(info_raw,':'),',');
 %% Translate
 % translate the response to 4 doubles using str2double() and
 % extractBetween() (Hint: the response is in the spec sheet)
-distance   = str2double(info{1});
+distance   = str2double(info{1}); % cell 1 of info is distance and so on
 pwm        = str2double(info{2});
 target     = str2double(info{3})
 deadpan    = str2double(info{4});

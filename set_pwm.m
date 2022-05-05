@@ -14,8 +14,8 @@ function set_pwm(device, pwm_value)
 %pwm_value = 0:4095;
 
 %% Send Command
-%writeline(device, "P" + pwm_value); below line works better
-if pwm_value > 4095
+%Make a hard max and min so the p control works better
+if pwm_value > 4095 
     write(device, append("P" + 3800),"string");
 elseif pwm_value < 1000
     write(device, append("P" + 1000),"string");
